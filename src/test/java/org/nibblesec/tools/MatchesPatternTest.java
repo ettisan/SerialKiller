@@ -10,25 +10,25 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import org.junit.Test;
-import org.nibblesec.tools.SerialKiller.TemplateList;
+import org.nibblesec.tools.serialkiller.policy.rules.MatchesPattern;
 
 /**
  * PatternListTest
  */
-public class PatternListTest {
+public class MatchesPatternTest {
     @Test(expected = NullPointerException.class)
     public void testCreateNull() {
-        new TemplateList(null,(String[]) null);
+        new MatchesPattern((String[]) null);
     }
 
     @Test(expected = PatternSyntaxException.class)
     public void testCreateBadPattern() {
-        new TemplateList(null,"(");
+    	new MatchesPattern("(");
     }
 
     @Test
     public void testCreateEmpty() {
-        TemplateList list = new TemplateList(null);
+    	MatchesPattern list = new MatchesPattern(new String[0]);
 
         Iterator<Pattern> iterator = list.iterator();
         assertFalse(iterator.hasNext());
@@ -36,7 +36,7 @@ public class PatternListTest {
 
     @Test
     public void testCreateSingle() {
-        TemplateList list = new TemplateList(null,"a");
+    	MatchesPattern list = new MatchesPattern("a");
 
         Iterator<Pattern> iterator = list.iterator();
         assertTrue(iterator.hasNext());
@@ -49,7 +49,7 @@ public class PatternListTest {
     @Test
     public void testCreateSequence() {
         String[] patterns = {"a", "b", "c"};
-        TemplateList list = new TemplateList(null, patterns);
+        MatchesPattern list = new MatchesPattern(patterns);
 
         int index = 0;
         for (Pattern pattern : list) {
@@ -63,7 +63,7 @@ public class PatternListTest {
     @Test
     public void testCreateSafeArgs() {
         String[] patterns = {"1", "2"};
-        TemplateList list = new TemplateList(null,patterns);
+        MatchesPattern list = new MatchesPattern(patterns);
         patterns[1] = "three";
 
         int index = 0;

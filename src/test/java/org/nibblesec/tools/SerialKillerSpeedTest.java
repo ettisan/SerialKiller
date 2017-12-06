@@ -7,8 +7,7 @@ import javax.naming.ConfigurationException;
 import java.io.*;
 
 public class SerialKillerSpeedTest {
-
-    @Test
+	@Test
     public void speedTest() throws IOException, ConfigurationException, ClassNotFoundException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream outputStream = new ObjectOutputStream(byteArrayOutputStream);
